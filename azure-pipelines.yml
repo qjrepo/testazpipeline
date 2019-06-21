@@ -15,21 +15,21 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-steps:
+
 - task: DotNetCoreInstaller@0
   inputs:
     version: '2.2.300' # replace this value with the version that you need for your project
 # ...
-steps:
+
 - script: dotnet restore
-steps:
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration Release' # Update this to match your need
-steps:
+
 - task: DotNetCoreCLI@2
   displayName: 'Install dotnetsay'
   inputs:
@@ -37,11 +37,11 @@ steps:
     projects: '**/*.csproj'
     custom: tool
     arguments: 'install -g dotnetsay'
-steps:
+
 # ...
 # do this near the end of your pipeline in most cases
 - task: PublishBuildArtifacts@1
-steps:
+
 # ...
 # do this near the end of your pipeline in most cases
 - script: dotnet pack /p:PackageVersion=$(version)  # define version variable elsewhere in your pipeline
@@ -52,7 +52,7 @@ steps:
     publishFeedCredentials: '<Name of the NuGet service connection>'
     versioningScheme: byEnvVar
     versionEnvVar: version
-steps:
+
 # ...
 # do this after you've built your app, near the end of your pipeline in most cases
 # for example, you do this before you deploy to an Azure web app on Windows
