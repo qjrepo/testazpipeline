@@ -47,3 +47,10 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
+
+- task: MFelling.AWSS3Upload.custom-build-task.S3Upload@0
+  displayName: 'Upload file to S3 bucket'
+  inputs:
+    BucketName: qjtest21
+
+
